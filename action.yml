@@ -1,6 +1,9 @@
 name: Doctor PR
 description: Address code reviews automatically with AI
-author: "Dr. PR[bot]"
+author: "Doctor PR"
+branding:
+  icon: "git-merge"
+  color: "black"
 inputs:
   base_branch_name:
     required: true
