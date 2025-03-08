@@ -5,6 +5,10 @@ branding:
   icon: "git-merge"
   color: "black"
 inputs:
+  anthropic_api_key:
+    required: true
+    description: The API key for the Anthropic API
+
   base_branch_name:
     required: true
     description: The name of the branch to merge into
@@ -41,6 +45,12 @@ runs:
     - name: Run Aider
       id: run_aider
       shell: bash
+      env:
+        AIDER_YES_ALWAYS: true
+        AIDER_AUTO_COMMITS: true
+        AIDER_CACHE_PROMPTS: true
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}
+        AIDER_MESSAGE: ${{inputs.aider_message}}
       run: |
         # Create a directory outside the Git repository
         mkdir -p /tmp/aider
@@ -77,7 +87,7 @@ runs:
         branch: "${{inputs.base_branch_name}}-fix-${{inputs.review_id}}"
         author: "${{env.GIT_USER_NAME}} <${{env.GIT_USER_EMAIL}}>"
         committer: "${{env.GIT_USER_NAME}} <${{env.GIT_USER_EMAIL}}>"
-        reviewers: ${{inputs.author_user_name}}
+        reviewers: ${{inputs.author_username}}
         title: ${{steps.extract_commit.outputs.commit_message}}
         body: |
           Address [review comment][1] for PR #${{inputs.base_pull_request_number}}
