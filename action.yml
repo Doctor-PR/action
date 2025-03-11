@@ -32,6 +32,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Verify Anthropic API Key
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.anthropic_api_key }}" ]; then
+          echo "Anthropic API key is not set"
+          exit 1
+        fi
     - name: Checkout
       uses: actions/checkout@v4
     - name: Configure Git
