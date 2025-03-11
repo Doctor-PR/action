@@ -22,8 +22,12 @@ inputs:
     description: The GitHub username of the PR author
 
   aider_args:
-    required: false
+    required: true
     description: Command line arguments to pass to Aider
+
+  aider_api_key:
+    required: true
+    description: The API key to use for Aider
 
 runs:
   using: "composite"
@@ -41,6 +45,8 @@ runs:
     - name: Run Aider
       id: run_aider
       shell: bash
+      env:
+        AIDER_API_KEY: ${{inputs.aider_api_key}}
       run: |
         # Create a directory outside the Git repository
         mkdir -p /tmp/aider
