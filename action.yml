@@ -5,10 +5,6 @@ branding:
   icon: "git-merge"
   color: "black"
 inputs:
-  anthropic_api_key:
-    required: true
-    description: The API key for the Anthropic API
-
   base_branch_name:
     required: true
     description: The name of the branch to merge into
@@ -21,24 +17,17 @@ inputs:
     required: true
     description: The ID of the review to address
 
-  aider_message:
-    required: true
-    description: The message to send to Aider
-
   author_username:
     required: true
     description: The GitHub username of the PR author
 
+  aider_args:
+    required: false
+    description: Command line arguments to pass to Aider
+
 runs:
   using: "composite"
   steps:
-    - name: Verify Anthropic API Key
-      shell: bash
-      run: |
-        if [ -z "${{ inputs.anthropic_api_key }}" ]; then
-          echo "Anthropic API key is not set"
-          exit 1
-        fi
     - name: Checkout
       uses: actions/checkout@v4
     - name: Configure Git
@@ -52,17 +41,11 @@ runs:
     - name: Run Aider
       id: run_aider
       shell: bash
-      env:
-        AIDER_YES_ALWAYS: true
-        AIDER_AUTO_COMMITS: true
-        AIDER_CACHE_PROMPTS: true
-        ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}
-        AIDER_MESSAGE: ${{inputs.aider_message}}
       run: |
         # Create a directory outside the Git repository
         mkdir -p /tmp/aider
         # Run aider and capture its output to a file outside the repo while also displaying it
-        aider | tee /tmp/aider/output.txt
+        aider ${{inputs.aider_args}} | tee /tmp/aider/output.txt
         # Store the output as a step output
         echo "aider_output<<EOF" >> $GITHUB_OUTPUT
         cat /tmp/aider/output.txt >> $GITHUB_OUTPUT
