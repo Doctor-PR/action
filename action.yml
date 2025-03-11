@@ -60,8 +60,6 @@ runs:
       with:
         base: ${{inputs.base_branch_name}}
         branch: "${{inputs.base_branch_name}}-fix-${{inputs.review_id}}"
-        author: "Doctor PR[bot] <202363839+Doctor-PR[bot]@users.noreply.github.com>"
-        committer: "Doctor PR[bot] <202363839+Doctor-PR[bot]@users.noreply.github.com>"
         reviewers: ${{inputs.author_username}}
         title: ${{steps.extract_commit.outputs.commit_message}}
         body: |
