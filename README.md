@@ -13,7 +13,7 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
 ## Getting Started
 
 1. Install the [GitHub App](https://github.com/apps/doctor-pr) to your repository.
-2. On your GitHub repository, go to `Settings -> Actions -> General -> Workflow permissions` and check `Read and write permissions` and `Allow GitHub Actions to create and approve pull requests`. This is required to allow the GitHub Action to create PRs.
+2. On your GitHub repository, go to `Settings -> Actions -> General -> Workflow permissions` and check `Read and write permissions` and `Allow GitHub Actions to create and approve pull requests`. This is required to allow the GitHub Action to create PRs. If it's grayed out, you may need to enable them in your organization settings.
 3. Create a new file in your repository called `.github/workflows/doctor-pr.yml` (must be named exactly this) and add the following code:
 
     ```yaml
