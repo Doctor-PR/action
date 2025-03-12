@@ -13,8 +13,9 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
 ## Getting Started
 
 1. Install the [GitHub App](https://github.com/apps/doctor-pr) to your repository.
-2. On your GitHub repository, go to `Settings -> Actions -> General -> Workflow permissions` and check `Read and write permissions` and `Allow GitHub Actions to create and approve pull requests`. This is required to allow the GitHub Action to create PRs. If it's grayed out, you may need to enable them in your organization settings.
-3. Create a new file in your repository called `.github/workflows/doctor-pr.yml` (must be named exactly this) and add the following code:
+2. On GitHub, go to `Settings -> Actions -> General -> Workflow permissions` and check `Read and write permissions` and `Allow GitHub Actions to create and approve pull requests`. This is required to allow the GitHub Action to create PRs. If it's grayed out, you may need to enable them in your organization settings.
+3. On GitHub, go to `Settings -> Secrets and variables -> Actions -> New repository secret` and add an `ANTHROPIC_API_KEY`. You can create one [here](https://console.anthropic.com/settings/keys).
+4. Create a new file in your repository called `.github/workflows/doctor-pr.yml` (must be named exactly this) and add the following code:
 
     ```yaml
     name: Doctor PR
@@ -36,9 +37,6 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
         aider_args:
             required: true
             type: string
-        aider_api_key:
-            required: true
-            type: string
     jobs:
     doctor-pr:
         runs-on: ubuntu-latest
@@ -51,7 +49,7 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
             review_id: ${{inputs.review_id}}
             author_username: ${{inputs.author_username}}
             aider_args: ${{inputs.aider_args}}
-            aider_api_key: ${{inputs.aider_api_key}}
+            aider_api_key: ${{secrets.ANTHROPIC_API_KEY}}
     ```
 
 ## Frequently Asked Questions
