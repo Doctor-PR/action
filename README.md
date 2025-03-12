@@ -54,8 +54,8 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
             aider_api_key: ${{inputs.aider_api_key}}
     ```
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
-## Is my code safe with Doctor PR?
+### Is my code safe with Doctor PR?
 
 Yes. Because the coding agent runs in GitHub Action rather than our server, your code never leaves GitHub's servers. Our GitHub Action is open source, and the coding agent we use ([Aider](https://github.com/Aider-AI/aider)) is also open source. As long as you trust GitHub and the LLM provider (Anthropic in our case), your code is safe.
