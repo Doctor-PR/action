@@ -25,9 +25,9 @@ inputs:
     required: true
     description: Command line arguments to pass to Aider
 
-  aider_api_key:
+  anthropic_api_key:
     required: true
-    description: The API key to use for Aider
+    description: The API key to use for Anthropic
 
 runs:
   using: "composite"
@@ -46,7 +46,7 @@ runs:
       id: run_aider
       shell: bash
       env:
-        AIDER_API_KEY: ${{inputs.aider_api_key}}
+        ANTHROPIC_API_KEY: ${{inputs.anthropic_api_key}}
       run: |
         # Create a directory outside the Git repository
         mkdir -p /tmp/aider
