@@ -49,6 +49,10 @@ runs:
       id: extract_commit
       shell: bash
       run: node ${{ github.action_path }}/lib/extract-commit.js
+    - name: Clean up aider files
+      shell: bash
+      run: |
+        rm -rf .aider*
     - name: Create Pull Request
       if: steps.extract_commit.outputs.changes_made == 'true'
       uses: peter-evans/create-pull-request@v7
