@@ -30,7 +30,7 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
         runs-on: ubuntu-latest
         steps:
         - name: Doctor PR
-            uses: Doctor-PR/action@main
+            uses: Doctor-PR/action@latest
             with:
             action_input: ${{inputs.action_input}}
             anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
