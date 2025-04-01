@@ -49,6 +49,10 @@ runs:
       id: extract_commit
       shell: bash
       run: node ${{ github.action_path }}/lib/extract-commit.js
+    - name: Ensure .aider changes aren't tracked
+      shell: bash
+      run: |
+        git rm -rf --cached .aider 2>/dev/null || true
     - name: Create Pull Request
       if: steps.extract_commit.outputs.changes_made == 'true'
       uses: peter-evans/create-pull-request@v7
