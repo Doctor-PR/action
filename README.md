@@ -22,19 +22,7 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
     on:
     workflow_dispatch:
         inputs:
-        base_branch_name:
-            required: true
-            type: string
-        base_pull_request_number:
-            required: true
-            type: string
-        review_id:
-            required: true
-            type: string
-        author_username:
-            required: true
-            type: string
-        aider_args:
+        action_input:
             required: true
             type: string
     jobs:
@@ -42,14 +30,10 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
         runs-on: ubuntu-latest
         steps:
         - name: Doctor PR
-            uses: Doctor-PR/dr-pr-action@v0.0.9
+            uses: Doctor-PR/action@main
             with:
-            base_branch_name: ${{inputs.base_branch_name}}
-            base_pull_request_number: ${{inputs.base_pull_request_number}}
-            review_id: ${{inputs.review_id}}
-            author_username: ${{inputs.author_username}}
-            aider_args: ${{inputs.aider_args}}
-            aider_api_key: ${{secrets.ANTHROPIC_API_KEY}}
+            action_input: ${{inputs.action_input}}
+            anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
     ```
 
 ## Frequently Asked Questions
