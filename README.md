@@ -22,19 +22,7 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
     on:
     workflow_dispatch:
         inputs:
-        base_branch_name:
-            required: true
-            type: string
-        base_pull_request_number:
-            required: true
-            type: string
-        review_id:
-            required: true
-            type: string
-        author_username:
-            required: true
-            type: string
-        aider_args:
+        action_input:
             required: true
             type: string
     jobs:
@@ -42,18 +30,8 @@ It consists of a Github App and an accompanying GitHub Action. The GitHub app is
         runs-on: ubuntu-latest
         steps:
         - name: Doctor PR
-            uses: Doctor-PR/dr-pr-action@v0.0.9
+            uses: Doctor-PR/dr-pr-action@main
             with:
-            base_branch_name: ${{inputs.base_branch_name}}
-            base_pull_request_number: ${{inputs.base_pull_request_number}}
-            review_id: ${{inputs.review_id}}
-            author_username: ${{inputs.author_username}}
-            aider_args: ${{inputs.aider_args}}
-            aider_api_key: ${{secrets.ANTHROPIC_API_KEY}}
+            action_input: ${{inputs.action_input}}
+            anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
     ```
-
-## Frequently Asked Questions
-
-### Is my code safe with Doctor PR?
-
-Yes. Because the coding agent runs in GitHub Action rather than our server, your code never leaves GitHub's servers. Our GitHub Action is open source, and the coding agent we use ([Aider](https://github.com/Aider-AI/aider)) is also open source. As long as you trust GitHub and the LLM provider (Anthropic in our case), your code is safe.
