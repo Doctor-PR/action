@@ -1,9 +1,8 @@
-# Doctor PR
-
 Doctor PR is your AI-powered code review assistant that automatically addresses review feedback with code changes.
 
 ## 🚀 What Doctor PR Does
-![workflow](https://github.com/user-attachments/assets/57da5353-c02f-48bb-a411-bd59c7d38ac4)
+
+![workflow](https://github.com/user-attachments/assets/c3c99537-345b-4c3a-ab73-cd6b3a78b3f9)
 
 1. When a review is submitted, an "Address with Doctor PR" button gets added
 2. Click the button to tell Doctor PR to address the review
@@ -18,7 +17,8 @@ Doctor PR is your AI-powered code review assistant that automatically addresses 
 - **Privacy first**: Your code never leaves GitHub's servers
 
 ## 🛠️ Quick Start
-![setup](https://github.com/user-attachments/assets/d939d6e6-6893-4026-b6b9-972f4858bc9a)
+
+![setup](https://github.com/user-attachments/assets/d5323d83-72d8-47a2-baa7-81ac43c4fb73)
 
 1. Install the [Doctor PR GitHub App](https://github.com/apps/doctor-pr)
 2. Enable GitHub Actions permissions:
