@@ -1,43 +1,67 @@
 # Doctor PR
 
-Doctor PR helps you address code reviews automatically with AI. 
+Doctor PR is your AI-powered code review assistant that automatically addresses review feedback with code changes.
 
-It consists of a Github App and an accompanying GitHub Action. The GitHub app is responsible for listening for new reviews and triggering the GitHub Action. The GitHub Action is responsible making the changes to address the review by running a coding agent ([Aider](https://github.com/Aider-AI/aider)) and opening a new PR. 
+## 🚀 What Doctor PR Does
 
-## How it works
+- Adds an "Address with Doctor PR" button to pull request reviews
+- Analyzes review comments using AI
+- Makes the appropriate code changes
+- Creates a new PR with the fixes
 
-1. When a review is submitted for your PR, a `Address with Doctor PR` button is automatically added to it.
-2. Clicking the button will trigger the GitHub Action, which will make a new PR with the changes and request a review from you.
-3. If you're happy with the changes, simply merge it back into your branch, and re-request a review.
+## 🔥 Why You'll Love It
 
-## Getting Started
+- **Save time**: Stop context-switching between reviews and fixing issues
+- **Learn faster**: See how AI solves the problems in your code
+- **Ship quicker**: Address review feedback without delay
+- **Privacy first**: Your code never leaves GitHub's servers
 
-1. Install the [GitHub App](https://github.com/apps/doctor-pr) to your repository.
-2. On GitHub, go to `Settings -> Actions -> General -> Workflow permissions` and check `Read and write permissions` and `Allow GitHub Actions to create and approve pull requests`. This is required to allow the GitHub Action to create PRs. If it's grayed out, you may need to enable them in your organization settings.
-3. On GitHub, go to `Settings -> Secrets and variables -> Actions -> New repository secret` and add an `ANTHROPIC_API_KEY`. You can create one [here](https://console.anthropic.com/settings/keys).
-4. Create a new file in your repository called `.github/workflows/doctor-pr.yml` (must be named exactly this) and add the following code:
+## 🛠️ Quick Start
 
-    ```yaml
-    name: Doctor PR
-    on:
-    workflow_dispatch:
-        inputs:
-        action_input:
-            required: true
-            type: string
-    jobs:
-    doctor-pr:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Doctor PR
-            uses: Doctor-PR/action@latest
-            with:
-            action_input: ${{inputs.action_input}}
-            anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
-    ```
+1. Install the [Doctor PR GitHub App](https://github.com/apps/doctor-pr)
+2. Enable GitHub Actions permissions:
+   - Go to `Settings -> Actions -> General -> Workflow permissions`
+   - Check `Read and write permissions`
+   - Check `Allow GitHub Actions to create and approve pull requests`
+3. Add your API key:
+   - Go to `Settings -> Secrets and variables -> Actions -> New repository secret`
+   - Add `ANTHROPIC_API_KEY` (get one [here](https://console.anthropic.com/settings/keys))
+4. Create a workflow file at `.github/workflows/doctor-pr.yml`:
 
-## Frequently Asked Questions
+```yaml
+name: Doctor PR
+on:
+  workflow_dispatch:
+    inputs:
+      action_input:
+        required: true
+        type: string
+jobs:
+  doctor-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Doctor PR
+        uses: Doctor-PR/action@latest
+        with:
+          action_input: ${{inputs.action_input}}
+          anthropic_api_key: ${{secrets.ANTHROPIC_API_KEY}}
+```
 
-### Is my code safe with Doctor PR?
+## 🔄 How It Works
 
-Yes. Because the coding agent runs in GitHub Action rather than our server, your code never leaves GitHub's servers. Our GitHub Action is open source, and the coding agent we use ([Aider](https://github.com/Aider-AI/aider)) is also open source. As long as you trust GitHub and the LLM provider (Anthropic in our case), your code is safe.
+1. When a review is submitted, the "Address with Doctor PR" button appears
+2. Click the button to trigger the AI assistant
+3. Doctor PR creates a new PR with the fixes
+4. Review the changes and merge if you're happy with them
+
+## 🔒 Security
+
+Your code stays secure because:
+- Doctor PR runs entirely in GitHub Actions
+- Your code never leaves GitHub's servers
+- We use open-source components ([Aider](https://github.com/Aider-AI/aider))
+- All AI processing uses Anthropic's Claude (via your own API key)
+
+## 💬 Questions?
+
+Have questions or feedback? [Open an issue](https://github.com/Doctor-PR/action/issues) or reach out to us at [support@drpr.app](mailto:support@drpr.app).
